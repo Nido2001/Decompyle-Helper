@@ -6,7 +6,7 @@
 _Make sure to have set your openai api key in the script!_
 
 ```
-python decompyleHelper.py <directory_path>
+python decompyleHelper.py <directory_path_with_pyc_files>
 ```
 
 ## Example Output
