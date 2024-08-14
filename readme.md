@@ -1,6 +1,6 @@
 # Decompyle-Helper
 ## Decompyle-Helper is a small script to help fix decompile errors produced by decompyle++.
-
+_Contact for private pyarmor(all modes) deobfuscations_
 
 ## Usage
 _Make sure to have set your openai api key in the script!_
