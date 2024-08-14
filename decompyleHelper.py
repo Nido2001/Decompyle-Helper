@@ -96,20 +96,36 @@ def save_decompiled_code(file_path, method_name, decompiled_code):
 
 def gpt4o_decompile(bytecode):
     #You can even use gpt3.5 here if your api key does not allow use of gpt4+, only real benefit of gpt4+ is context window for larger methods to fix
-    response = openai.chat.completions.create(
-      model="gpt-4o",
-      messages=[
-          {"role": "system", "content": "You are a Python code decompiler."},
-          {"role": "user", "content": f"Convert this python bytecode back to python code as best as you can ONLY THE METHOD NOTHING ELSE no imports for example, respond just with the code and not in a block:\n\n{bytecode}"}
-      ],
-      max_tokens=4000
-    )
-    code_block_pattern = re.compile(r'```(?:python)?(.*?)```', re.DOTALL)
-    match = code_block_pattern.search(response.choices[0].message.content.strip())
-    if match:
-        return match.group(1).strip()
-    
-    return response.choices[0].message.content.strip()
+    try:
+        response = openai.chat.completions.create(
+          model="gpt-4o",
+          messages=[
+              {"role": "system", "content": "You are a Python code decompiler."},
+              {"role": "user", "content": f"Convert this python bytecode back to python code as best as you can ONLY THE METHOD NOTHING ELSE no imports for example, respond just with the code and not in a block:\n\n{bytecode}"}
+          ],
+          max_tokens=4000
+        )
+        code_block_pattern = re.compile(r'```(?:python)?(.*?)```', re.DOTALL)
+        match = code_block_pattern.search(response.choices[0].message.content.strip())
+        if match:
+            return match.group(1).strip()
+        
+        return response.choices[0].message.content.strip()
+    except:
+          response = openai.chat.completions.create(
+          model="gpt-3.5-turbo",
+          messages=[
+              {"role": "system", "content": "You are a Python code decompiler."},
+              {"role": "user", "content": f"Convert this python bytecode back to python code as best as you can ONLY THE METHOD NOTHING ELSE no imports for example, respond just with the code and not in a block:\n\n{bytecode}"}
+          ],
+          max_tokens=4000
+        )
+        code_block_pattern = re.compile(r'```(?:python)?(.*?)```', re.DOTALL)
+        match = code_block_pattern.search(response.choices[0].message.content.strip())
+        if match:
+            return match.group(1).strip()
+        
+        return response.choices[0].message.content.strip()
 
 def save_decompiled_code(file_path, method_name, decompiled_code):
     base_path = os.path.splitext(file_path)[0]
