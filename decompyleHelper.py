@@ -112,7 +112,7 @@ def gpt4o_decompile(bytecode):
         
         return response.choices[0].message.content.strip()
     except:
-          response = openai.chat.completions.create(
+        response = openai.chat.completions.create(
           model="gpt-3.5-turbo",
           messages=[
               {"role": "system", "content": "You are a Python code decompiler."},
