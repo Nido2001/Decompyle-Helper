@@ -8,6 +8,10 @@ _Make sure to have set your openai api key in the script!_
 ```
 python decompyleHelper.py <directory_path_with_pyc_files>
 ```
+E.G.
+```
+python decompyleHelper.py "C:\myFolder\targetPycFiles"
+```
 
 ## Example Output
 ### pycdc output:
